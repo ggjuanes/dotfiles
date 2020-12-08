@@ -1,0 +1,13 @@
+[user]
+	name = Guillermo Garcia Juanes
+	email = ggjuanes@gmail.com
+	signingkey = 7FCEC5B4E5679D36
+
+[commit]
+	gpgsign = true
+
+[tag]
+	gpgsign = true
+
+[gpg]
+	program = gpg
