@@ -4,7 +4,6 @@ alias cdev='cd ~/Development'
 # Git
 alias g="git"
 alias gs="git status -sb"
-alias gaa="git add -A"
 
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
