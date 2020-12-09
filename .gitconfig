@@ -11,3 +11,9 @@
 
 [gpg]
 	program = gpg
+
+[pull]
+	rebase = true
+
+[fetch]
+	prune = true
