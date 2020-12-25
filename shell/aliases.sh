@@ -4,6 +4,8 @@ alias cdev='cd ~/Development'
 # Git
 alias g="git"
 alias gs="git status -sb"
+alias gcleanmerged="gco develop && gf && git branch --merged >/tmp/merged-branches && vim /tmp/merged-branches && xargs git branch -d </tmp/merged-branches && gco -"
+alias gcleanlocal="gco develop && gf && { git branch -vv | grep ': gone]'|  grep -v '*' | awk '{ print \$1; }' > /tmp/gone-branches } && vim /tmp/gone-branches && xargs git branch -D < /tmp/gone-branches && gco -"
 
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
