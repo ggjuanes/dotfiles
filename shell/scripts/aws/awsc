@@ -1,0 +1,62 @@
+#!/bin/bash
+
+validate_dependencies() {
+	if ! command -v "$1" &> /dev/null
+	then
+    	echo "$1 could not be found"
+    	exit 1
+	fi
+}
+
+validate_arguments() {
+	if [ "$1" == "help" ]
+	then
+		echo '*** Help:'
+		echo "Script allows you to connect to a instance using session manager."
+		echo "Script requires the following arguments to work: profile, cluster and service."
+		echo "Example connect_instance.sh qa QA v2-core-cron_qa"
+		exit 0
+	fi
+
+	if [ -z "$1" ]
+	then
+	    echo "First argument is missing. Profile is required"
+	    exit 1
+	fi
+
+	if [ -z "$2" ]
+	then
+	    echo "Second argument is missing. Cluster is required"
+	    exit 1
+	fi
+	if [ -z "$3" ]
+	then
+	    echo "Third argument is missing. Service is required"
+	    exit 1
+	fi
+}
+error_on_null_or_empty_and_exit() {
+	if [ "$2" == "null" ] || [ -z "$2" ]
+	then
+		echo "*** Error: $1"
+		exit 1
+fi
+}
+
+validate_dependencies "aws"
+validate_dependencies "jq"
+validate_arguments $1 $2 $3
+PROFILE=$1
+CLUSTER=$2
+SERVICE=$3
+
+
+echo "Connecting to instance for service $SERVICE in cluster $CLUSTER on $PROFILE environment"
+CONTAINER_INSTANCE_ARN=`aws ecs list-container-instances --cluster $CLUSTER --status ACTIVE --profile $PROFILE --filter 'task:group == service:'$SERVICE | jq -r '.containerInstanceArns[0]'`
+error_on_null_or_empty_and_exit 'container instance not found for service.' $CONTAINER_INSTANCE_ARN
+
+INSTANCE_ID=`aws ecs describe-container-instances --profile $PROFILE --container-instances $CONTAINER_INSTANCE_ARN --cluster $CLUSTER | jq -r '.containerInstances[].ec2InstanceId'`
+error_on_null_or_empty_and_exit 'instace not found.' $INSTANCE_ID
+
+echo "Starting session on $INSTANCE_ID..."
+aws ssm start-session --target $INSTANCE_ID --profile $PROFILE
