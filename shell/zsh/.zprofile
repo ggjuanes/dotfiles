@@ -6,7 +6,7 @@ unset file;
 PLATFORM=`uname`
 if [[ "$PLATFORM" == 'Linux' ]]
   then
-    for file in ~/shell/{aliases-ubuntu.sh,exports-ubuntu.sh}; do
+    for file in ~/shell/{aliases-ubuntu.sh,exports-ubuntu.sh,functions-ubuntu.sh}; do
   	    [ -r "$file" ] && [ -f "$file" ] && source "$file";
     done;
 fi
