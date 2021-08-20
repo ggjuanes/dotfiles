@@ -1,19 +1,24 @@
-#!/bin/bash
+#!/bin/zsh
 
 # Create a new directory and enter it
-mkd() {
+function mkd() {
 	mkdir -p "$@" && cd "$_";
 }
 
-print_success() {
+function print_success() {
     printf " [✔] %s\n" "$1"
 }
 
-print_error() {
+function print_error() {
     printf " [✖] %s\n" "$1"
 }
 
-sp() {
+function cdev() {
+  _export_config_value '.development_folder'
+  cd "$DOTFILE_CONFIG_VALUE"
+}
+
+function _select_project() {
   cdev
   local project=""
   project=$(ls | fzf)
@@ -21,39 +26,39 @@ sp() {
   cd "$project" || exit
 }
 
-_validate_config() {
+function _validate_config() {
   if [ -z "$DOTFILE_CONFIG_FILE" ]; then
         print_error "Config file variable is not defined. Please set DOTFILE_CONFIG_FILE"
   fi
 }
 
-_connect_vpn() {
+function _export_config_value() {
+  export DOTFILE_CONFIG_VALUE=""
+  DOTFILE_CONFIG_VALUE=$(jq -r "$1" "$DOTFILE_CONFIG_FILE")
+}
+
+function _connect_vpn() {
   local env=""
-  local dir=$(jq -r '.vpn.directory' "$DOTFILE_CONFIG_FILE")
+  _export_config_value '.vpn.directory'
+  local dir=$DOTFILE_CONFIG_VALUE
   env=$(ls $dir | fzf)
 
   local tmpfile=""
   tmpfile="/tmp/vpn_connect.XXXXXXX"
   tmpfile=$(mktemp "$tmpfile")
-  jq -r '.vpn.user' "$DOTFILE_CONFIG_FILE" >> "$tmpfile"
+  _export_config_value '.vpn.user'
+  echo "$DOTFILE_CONFIG_VALUE" >> "$tmpfile"
 
   printf 'Enter vpn code : '
   read -r password
   echo "$password" >> $tmpfile
-  cat $tmpfile
 
   sudo openvpn --config "${dir}/${env}" --auth-user-pass "$tmpfile"
 }
 
-_reverse_search() {
+function _reverse_search() {
   local selected_command
   selected_command=$(fc -rl 1 | awk '{$1="";print substr($0,2)}' | fzf)
 
   LBUFFER=$selected_command
 }
-
-zle -N _connect_vpn
-bindkey '^[^V' _connect_vpn
-
-zle -N _reverse_search
-bindkey '^r' _reverse_search

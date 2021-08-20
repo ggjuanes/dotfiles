@@ -1,6 +1,3 @@
-# Jumps
-alias cdev='cd ~/Development'
-
 # Git
 alias g="git"
 alias gs="git status -sb"
