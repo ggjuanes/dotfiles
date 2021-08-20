@@ -11,5 +11,7 @@ if [[ "$PLATFORM" == 'Linux' ]]
     done;
 fi
 
+_validate_config
+
 autoload -U compinit && compinit
 zmodload -i zsh/complist
