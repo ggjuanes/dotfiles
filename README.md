@@ -2,11 +2,24 @@
 
 [![License](https://img.shields.io/github/license/ggjuanes/dotfiles)](LICENSE)
 
-## Installation
+## Dependencies
+### Mac
+- [Homebrew](https://brew.sh/)
 
-Run: `sh installer.sh` and confirm overide of files
+## Installation
+### Mac
+
+1. Run: `cd dotfiles/mac/brew && brew bundle`
+2. Open Rectangle and confirm permissions, set recommended config.
+
+### Both
+1. Run: `sh installer.sh` and confirm override of files
 
 <img src="https://user-images.githubusercontent.com/6409572/101478433-fb3a4900-3950-11eb-97e4-2e29744e5140.gif" width="60%">
+
+2. Open Spotify and configure:
+   - Streaming Quality -> Very high
+   - Download Quality -> Very high
 
 ## Ohmyzsh Command Helpers
 - [git](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git)

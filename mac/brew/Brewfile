@@ -1,3 +1,15 @@
+## Shell
 brew "jq"
 brew "fzf"
 brew "bash"
+
+# Software
+## Development
+cask "iterm2"
+cash "sublime"
+
+## Productivity
+cask "rectangle"
+
+## Other
+cask "spotify"
