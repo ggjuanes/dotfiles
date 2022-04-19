@@ -3,6 +3,8 @@ brew "jq"
 brew "fzf"
 brew "bash"
 brew "gpg"
+brew "zsh-autosuggestions"
+brew "zsh-syntax-highlighting"
 
 # Software
 ## Development

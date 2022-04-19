@@ -14,13 +14,26 @@
 3. Run: `cd .. && ./default.macos`
 
 ### Both
-1. Run: `sh installer.sh` and confirm override of files
+1. Install `sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
+2. Install https://github.com/romkatv/powerlevel10k
+3. Run: `sh installer.sh` and confirm override of files
 
 <img src="https://user-images.githubusercontent.com/6409572/101478433-fb3a4900-3950-11eb-97e4-2e29744e5140.gif" width="60%">
 
-2. Open Spotify and configure:
+4. Open Spotify and configure:
    - Streaming Quality -> Very high
    - Download Quality -> Very high
+
+5. Create config file in `~/dotfiles_config.json` and use as example:
+```json
+{
+	"vpn": {
+		"directory": "",
+		"user": ""
+	},
+	"development_folder": "/Users/<user>/Development"
+}
+```
 
 ## Ohmyzsh Command Helpers
 - [git](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git)
