@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# Close any open System Preferences panes, to prevent them from overriding
+# settings we’re about to change
+osascript -e 'tell application "System Preferences" to quit'
+
+defaults write -g AppleInterfaceStyle -string "Dark"
+
+# Trackpad
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool true
+defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
+
+# Software
+defaults write com.spotify.client AutoStartSettingIsHidden -bool false

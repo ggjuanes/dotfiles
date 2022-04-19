@@ -11,6 +11,7 @@
 
 1. Run: `cd dotfiles/mac/brew && brew bundle`
 2. Open Rectangle and confirm permissions, set recommended config.
+3. Run: `cd .. && ./default.macos`
 
 ### Both
 1. Run: `sh installer.sh` and confirm override of files
