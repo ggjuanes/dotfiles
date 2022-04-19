@@ -2,11 +2,12 @@
 brew "jq"
 brew "fzf"
 brew "bash"
+brew "gpg"
 
 # Software
 ## Development
 cask "iterm2"
-cash "sublime"
+cask "sublime-text"
 
 ## Productivity
 cask "rectangle"
