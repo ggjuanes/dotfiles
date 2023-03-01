@@ -9,9 +9,10 @@
 ## Installation
 ### Mac
 
-1. Run: `cd dotfiles/mac/brew && brew bundle`
-2. Open Rectangle and confirm permissions, set recommended config.
-3. Run: `cd .. && ./default.macos`
+1. Install [brew](https://brew.sh/)
+2. Run: `cd dotfiles/mac/brew && brew bundle`
+3. Open Rectangle and confirm permissions, set recommended config.
+4. Run: `cd .. && ./default.macos`
 
 ### Both
 1. Install `sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`

@@ -7,7 +7,9 @@ osascript -e 'tell application "System Preferences" to quit'
 defaults write -g AppleInterfaceStyle -string "Dark"
 
 # Trackpad
-defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool true
+defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerHorizSwipeGesture -int 2
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -int true
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerHorizSwipeGesture -int 0
 defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
 
 # Software
