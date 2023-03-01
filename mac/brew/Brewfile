@@ -10,6 +10,9 @@ brew "zsh-syntax-highlighting"
 ## Development
 cask "iterm2"
 cask "sublime-text"
+cask "intellij-idea-ce"
+cask "1password"
+
 
 ## Productivity
 cask "rectangle"
