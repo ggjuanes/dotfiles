@@ -8,6 +8,8 @@ brew "zsh-syntax-highlighting"
 
 # Software
 ## Development
+brew "docker-compose"
+cask "docker"
 cask "iterm2"
 cask "sublime-text"
 cask "intellij-idea-ce"
