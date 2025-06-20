@@ -3,6 +3,8 @@ brew "jq"
 brew "fzf"
 brew "bash"
 brew "gpg"
+cask "gpg-suite"
+brew "pinentry-mac"
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
 
@@ -12,12 +14,14 @@ brew "docker-compose"
 cask "docker"
 cask "iterm2"
 cask "sublime-text"
-cask "intellij-idea-ce"
 cask "1password"
+cask "jetbrains-toolbox"
 
 
 ## Productivity
-cask "rectangle"
+#cask "rectangle"
+cask "raycast"
+cask "shottr"
+cask "notion"
 
 ## Other
-cask "spotify"

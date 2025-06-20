@@ -3,14 +3,50 @@
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change
 osascript -e 'tell application "System Preferences" to quit'
+osascript -e 'tell application "System Settings" to quit' 2>/dev/null
 
 defaults write -g AppleInterfaceStyle -string "Dark"
 
-# Trackpad
-defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerHorizSwipeGesture -int 2
-defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -int true
-defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerHorizSwipeGesture -int 0
-defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
 
-# Software
-defaults write com.spotify.client AutoStartSettingIsHidden -bool false
+# Trackpad settings for Sequoia
+# Three-finger drag (this might need to be enabled in Accessibility settings manually)
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true
+
+# Tap to click
+defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults write -g com.apple.mouse.tapBehavior -int 1
+
+# Four finger swipe
+defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerHorizSwipeGesture -int 2
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadFourFingerHorizSwipeGesture -int 2
+
+# Three finger horizontal swipe (disable)
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerHorizSwipeGesture -int 0
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerHorizSwipeGesture -int 0
+
+# Keyboard layouts (Spanish and British)
+defaults write com.apple.HIToolbox AppleEnabledInputSources -array \
+    '<dict><key>InputSourceKind</key><string>Keyboard Layout</string><key>KeyboardLayout ID</key><integer>87</integer><key>KeyboardLayout Name</key><string>Spanish - ISO</string></dict>'  \
+    '<dict><key>InputSourceKind</key><string>Keyboard Layout</string><key>KeyboardLayout ID</key><integer>2</integer><key>KeyboardLayout Name</key><string>British</string></dict>'
+#defaults read com.apple.HIToolbox AppleEnabledInputSources
+
+# Set Spanish as default
+defaults write com.apple.HIToolbox AppleDefaultdAsciiInputSource -dict \
+    InputSourceKind "Keyboard Layout" \
+    "KeyboardLayout ID" -int 2 \
+    "KeyboardLayout Name" "British"
+
+
+# Restart input method daemon
+sudo pkill -f "com.apple.inputmethod"
+
+# Force reload settings
+/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+
+echo "Settings applied for macOS Sequoia 15.5"
+echo "Note: Three-finger drag may need to be enabled manually in:"
+echo "System Settings > Accessibility > Pointer Control > Trackpad Options > Dragging Style"
+echo ""
+echo "Please restart your Mac for all changes to take effect."
