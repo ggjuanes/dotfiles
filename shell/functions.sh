@@ -62,3 +62,10 @@ function _reverse_search() {
 
   LBUFFER=$selected_command
 }
+
+function _git_change_branch() {
+   local branch=""
+   branch=$(gb | fzf | tr -d '[:space:]')
+
+   git checkout "$branch"
+}
