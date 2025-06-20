@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# Conventional Commit validation script
+# Format: <type>[optional scope]: <description>
+# Types: feat, fix, test, docs, chore, refactor, revert
+# Allowed scopes: common, income-growth-tracking, retirement-savings-tracking
+
+commit_msg_file=$1
+commit_msg=$(cat "$commit_msg_file")
+
+# Define the pattern for conventional commits
+conventional_pattern='^(feat|fix|test|docs|chore|refactor|revert)(\([a-z0-9-]+\))?:\s*.+'
+
+# Define allowed scopes
+allowed_scopes=("common" "mac" "terminal")
+
+if ! [[ "$commit_msg" =~ $conventional_pattern ]]; then
+    echo "ERROR: Commit message does not follow conventional commits format."
+    echo "Format: <type>[optional scope]: <description>"
+    echo "Types: feat, fix, test, docs, chore, refactor, revert"
+    echo ""
+    echo "Examples:"
+    echo "  feat: add new feature"
+    echo "  fix(auth): resolve login issue"
+    echo "  docs: update README"
+    exit 1
+fi
+
+# Extract scope if present
+if [[ "$commit_msg" =~ ^[^(]+\(([^)]+)\) ]]; then
+    scope="${BASH_REMATCH[1]}"
+
+    # Check if scope is in the allowed list
+    valid_scope=false
+    for allowed_scope in "${allowed_scopes[@]}"; do
+        if [[ "$scope" == "$allowed_scope" ]]; then
+            valid_scope=true
+            break
+        fi
+    done
+
+    if ! $valid_scope; then
+        echo "ERROR: Invalid scope '$scope'."
+        echo "Allowed scopes: ${allowed_scopes[*]}"
+        echo ""
+        echo "Examples:"
+        echo "  feat(common): add new feature"
+        echo "  fix(income-growth-tracking): resolve calculation issue"
+        echo "  docs(retirement-savings-tracking): update documentation"
+        exit 1
+    fi
+fi
+
+exit 0
