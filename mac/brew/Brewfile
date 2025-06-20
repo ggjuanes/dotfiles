@@ -3,6 +3,8 @@ brew "jq"
 brew "fzf"
 brew "bash"
 brew "gpg"
+cask "gpg-suite"
+brew "pinentry-mac"
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
 
