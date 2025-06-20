@@ -19,6 +19,9 @@ cask "1password"
 
 
 ## Productivity
-cask "rectangle"
+#cask "rectangle"
+cask "raycast"
+cask "shottr"
+cask "notion"
 
 ## Other
