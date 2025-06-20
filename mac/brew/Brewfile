@@ -14,8 +14,8 @@ brew "docker-compose"
 cask "docker"
 cask "iterm2"
 cask "sublime-text"
-cask "intellij-idea-ce"
 cask "1password"
+cask "jetbrains-toolbox"
 
 
 ## Productivity
