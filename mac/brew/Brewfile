@@ -11,8 +11,9 @@ brew "zsh-syntax-highlighting"
 # Software
 ## Development
 brew "docker-compose"
-cask "docker"
+cask "docker-desktop"
 cask "iterm2"
+cask "visual-studio-code"
 cask "sublime-text"
 cask "1password"
 cask "jetbrains-toolbox"
